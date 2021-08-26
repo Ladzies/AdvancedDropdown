@@ -18,7 +18,7 @@ code {
 	--color-placeholder: #bfbcd2;
 	--color-text: #342d5d;
 	--border-radius: 5px;
-	--border: 1px solid #a799ff40;
+	--border-style: 1px solid #a799ff40;
 	--speed: 500ms;
 	--nav-size: 60px;
 	--shadow-soft: 0 0 14px 5px #5035ff10;
@@ -65,9 +65,54 @@ a {
 	background-color: var(--color-before);
 	border-radius: 50%;
 	padding: 5px;
-	transition: background-color 300ms;
+	margin: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 250ms;
 }
 
 .icon-button:hover {
 	background-color: var(--color-after);
+}
+
+.icon-button svg {
+	fill: var(--color-text);
+	height: 20px;
+	transition: fill 250ms;
+}
+
+.icon-button:hover svg {
+	fill: var(--color-primary);
+}
+
+/* Dropdown Menu */
+
+.dropdown {
+	position: absolute;
+	width: 304px;
+	top: calc(var(--nav-size) - 6px);
+	transform: translateX(-45%);
+	background-color: white;
+	border: var(--border-style);
+	border-radius: var(--border-radius);
+	padding: 10px;
+	overflow: hidden;
+}
+
+.menu-item {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	border-radius: var(--border-radius);
+	transition: background var(--speed);
+	padding: 0.5rem;
+}
+
+.menu-item:hover {
+	background-color: var(--color-light);
+}
+
+.icon-right {
+	margin-left: auto;
 }
