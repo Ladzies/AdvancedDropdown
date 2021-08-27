@@ -1,15 +1,10 @@
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
-		'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-		'Droid Sans', 'Helvetica Neue', sans-serif;
+	font-family: 'Karla', -apple-system, BlinkMacSystemFont,
+		'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+		'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas,
-		'Courier New', monospace;
 }
 
 :root {
@@ -17,11 +12,17 @@ code {
 	--color-light: #a799ff20;
 	--color-placeholder: #bfbcd2;
 	--color-text: #342d5d;
+	--color-border: #a799ff40;
 	--border-radius: 5px;
-	--border-style: 1px solid #a799ff40;
+	--border-style: 1px solid var(--color-border);
 	--speed: 500ms;
 	--nav-size: 60px;
 	--shadow-soft: 0 0 14px 5px #5035ff10;
+	--dropdown-width: 304px;
+}
+
+* {
+	box-sizing: border-box;
 }
 
 ul {
@@ -35,84 +36,180 @@ a {
 	text-decoration: none;
 }
 
+/* Navbar */
+
 .navbar {
-	height: var(--nav-size);
 	background-color: white;
 	box-shadow: var(--shadow-soft);
+	height: var(--nav-size);
 	padding: 0 20px;
 }
 
 .navbar-nav {
-	max-width: 100%;
-	height: 100%;
 	display: flex;
+	height: 100%;
 	justify-content: flex-end;
+	max-width: 100%;
 }
 
 .nav-item {
-	width: calc(var(--nav-size) * 0.8);
-	display: flex;
 	align-items: center;
+	display: flex;
 	justify-content: center;
+	width: calc(var(--nav-size) * 0.8);
 }
+
+/* Icon */
 
 .icon-button {
 	--button-size: calc(var(--nav-size) * 0.5);
-	--color-before: #c7c3df40;
 	--color-after: var(--color-light);
-	width: var(--button-size);
-	height: var(--button-size);
-	background-color: var(--color-before);
-	border-radius: 50%;
-	padding: 5px;
-	margin: 2px;
-	display: flex;
+	--color-before: #c7c3df40;
 	align-items: center;
+	display: flex;
+	height: var(--button-size);
 	justify-content: center;
-	transition: background-color 250ms;
-}
-
-.icon-button:hover {
-	background-color: var(--color-after);
+	width: var(--button-size);
+	border-radius: var(--border-radius);
+	overflow: hidden;
 }
 
 .icon-button svg {
+	fill: black;
+}
+
+.icon-button img {
+	height: 100%;
+}
+
+.menu-separator {
+	background-color: var(--color-border);
+	height: 1px;
+	width: var(--dropdown-width);
+	margin: 7px 0;
+	align-self: center;
+}
+
+.--circle-button {
+	background-color: var(--color-before);
+	border-radius: 50%;
+	padding: 5px;
+	width: 40px;
+	height: 40px;
+	transition: background-color 250ms;
+}
+
+.--circle-button:hover {
+	background-color: var(--color-after);
+}
+
+.--circle-button svg {
 	fill: var(--color-text);
-	height: 20px;
+	height: 25px;
 	transition: fill 250ms;
 }
 
-.icon-button:hover svg {
+.--circle-button:hover svg {
 	fill: var(--color-primary);
+}
+
+.--menu-button-left {
+	margin-right: 10px;
+}
+
+.--menu-button svg {
+	height: 28px;
 }
 
 /* Dropdown Menu */
 
 .dropdown {
+	background-color: white;
+	border-radius: var(--border-radius);
+	border: var(--border-style);
+	overflow: hidden;
+	padding: 7px 10px;
 	position: absolute;
-	width: 304px;
 	top: calc(var(--nav-size) - 6px);
 	transform: translateX(-45%);
-	background-color: white;
-	border: var(--border-style);
-	border-radius: var(--border-radius);
-	padding: 10px;
-	overflow: hidden;
+	width: var(--dropdown-width);
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	box-shadow: var(--shadow-soft);
+	transition: height var(--speed) ease;
 }
 
 .menu-item {
-	height: 50px;
+	border-radius: var(--border-radius);
 	display: flex;
 	align-items: center;
-	border-radius: var(--border-radius);
-	transition: background var(--speed);
-	padding: 0.5rem;
+	font-size: 20px;
+	padding: 10px;
+	margin: 2.5px 0;
+	justify-content: space-between;
+}
+
+.menu-item svg {
+	fill: var(--color-text);
+}
+
+.menu-item-group {
+	display: flex;
+	align-items: center;
 }
 
 .menu-item:hover {
 	background-color: var(--color-light);
 }
 
+.menu-item:hover svg {
+	fill: var(--color-primary);
+}
+
 .icon-right {
 	margin-left: auto;
+}
+
+/* CSS Transition */
+
+.menu {
+	display: flex;
+	flex-direction: column;
+}
+
+.menu-primary-enter {
+	position: absolute;
+	transform: translateX(-120%);
+}
+
+.menu-primary-enter-active {
+	transform: translateX(0%);
+	transition: all var(--speed) ease;
+}
+
+.menu-primary-exit {
+	position: absolute;
+}
+
+.menu-primary-exit-active {
+	transform: translateX(-120%);
+	transition: all var(--speed) ease;
+}
+
+.menu-secondary-enter {
+	transform: translateX(120%);
+}
+
+.menu-secondary-enter-active {
+	transform: translateX(0%);
+	transition: all var(--speed) ease;
+}
+
+/* .menu-secondary-exit {
+} */
+
+.menu-secondary-exit-active {
+	transform: translateX(120%);
+	transition: all var(-speed) ease;
 }
