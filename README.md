@@ -1,4 +1,3 @@
-# Redesign of scrimba with more robust user experience
-
+# Advanced Dropdown (similar to facebook)
 ## Dependencies
 * React transition group
